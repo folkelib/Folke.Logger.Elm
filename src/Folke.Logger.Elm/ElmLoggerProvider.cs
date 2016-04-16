@@ -12,13 +12,14 @@ namespace Folke.Logger.Elm
         private readonly ConcurrentDictionary<string, ElmLogger> loggers = new ConcurrentDictionary<string, ElmLogger>();
         private readonly ElmLoggerSettings settings;
 
-        public ElmLoggerProvider(IDatabaseDriver databaseDriver, string connectionString)
+        public ElmLoggerProvider(IDatabaseDriver databaseDriver, string connectionString, LogLevel minLevel)
         {
             settings = new ElmLoggerSettings
             {
                 DatabaseDriver = databaseDriver,
                 Mapper = new Mapper(),
-                ConnectionString = connectionString
+                ConnectionString = connectionString,
+                MinLevel = minLevel
             };
 
             using (var connection = FolkeConnection.Create(databaseDriver, settings.Mapper, connectionString))

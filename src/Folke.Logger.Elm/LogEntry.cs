@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using Folke.Elm;
 using Microsoft.Extensions.Logging;
 
@@ -19,6 +20,7 @@ namespace Folke.Logger.Elm
         public LogLevel LogLevel { get; set; }
 
         /// <summary>Gets or sets the content of the log entry</summary>
+        [MaxLength(5000)]
         public string Content { get; set; }
     }
 }

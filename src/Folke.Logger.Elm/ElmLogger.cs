@@ -17,6 +17,8 @@ namespace Folke.Logger.Elm
 
         public void Log(LogLevel logLevel, int eventId, object state, Exception exception, Func<object, Exception, string> formatter)
         {
+            if (!IsEnabled(logLevel)) return;
+
             using (var connection = FolkeConnection.Create(settings.DatabaseDriver, settings.Mapper, settings.ConnectionString))
             {
                 using (var transaction = connection.BeginTransaction())
@@ -25,7 +27,8 @@ namespace Folke.Logger.Elm
                     {
                         LogLevel = logLevel,
                         Category = categoryName,
-                        Content = formatter(state, exception)
+                        Content = formatter(state, exception),
+                        DateTime = DateTime.UtcNow
                     };
                     connection.Save(logEntry);
                     transaction.Commit();
@@ -35,7 +38,7 @@ namespace Folke.Logger.Elm
 
         public bool IsEnabled(LogLevel logLevel)
         {
-            return true;
+            return logLevel >= settings.MinLevel;
         }
 
         public IDisposable BeginScopeImpl(object state)
