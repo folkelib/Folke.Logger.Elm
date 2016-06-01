@@ -27,7 +27,8 @@ namespace Folke.Logger.Elm
                     {
                         LogLevel = logLevel,
                         Category = categoryName,
-                        Content = exception.ToString(), // formatter(state, exception),
+                        Content = formatter(state, exception),
+                        Exception = exception?.ToString(),
                         DateTime = DateTime.UtcNow
                     };
                     connection.Save(logEntry);

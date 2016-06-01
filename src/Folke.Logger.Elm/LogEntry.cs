@@ -22,5 +22,9 @@ namespace Folke.Logger.Elm
         /// <summary>Gets or sets the content of the log entry</summary>
         [MaxLength(5000)]
         public string Content { get; set; }
+
+        /// <summary>Gets or sets the content of the exception (if present)</summary>
+        [MaxLength(5000)]
+        public string Exception { get; set; }
     }
 }
