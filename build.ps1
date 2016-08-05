@@ -10,7 +10,7 @@ function setProjectionVersion([String]$fileName, [String]$version) {
 if ($version -ne "") {
     setProjectionVersion ".\src\Folke.Logger.Elm\project.json" $version
     & dotnet restore
-    cd .\src\Folke.Identity.Server
+    cd .\src\Folke.Logger.Elm
     & dotnet pack -c Release
     $file = Get-Item "bin\Release\*.$version.nupkg"
     nuget push $file.FullName $key -Source https://api.nuget.org/v3/index.json
