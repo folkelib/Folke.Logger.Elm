@@ -9,7 +9,7 @@
   },
 
   "dependencies": {
-    "Folke.Logger.Elm": "1.2.0-*",
+    "Folke.Logger.Elm": "1.4.0-*",
     "xunit": "2.1.0-*",
     "dotnet-test-xunit": "1.0.0-rc2-build10015"
   },
